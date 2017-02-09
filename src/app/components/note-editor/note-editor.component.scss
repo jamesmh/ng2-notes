@@ -1,35 +1,38 @@
 @import '../../../_vars.scss';
-
 textarea {
-    border: none;
-    overflow: auto;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    width:100%;
-    background-color: transparent;
-    box-sizing: border-box;
-    resize: none;
-    padding: 10px;
+  transition: all .3s;
+  border: none;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  background-color: transparent;
+  box-sizing: border-box;
+  resize: none;
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
 
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    font-size: 24px;
+  &:focus {
+    background-color: #000;
+    color: #fff;
+  }
 }
 
 [name="title"] {
-    height:50px;
-    border-bottom: 1px dotted $clr-gray;
-    background-color: rgba($clr-gray, .1);
-    resize: none;
-    white-space: nowrap;
-    overflow-x: none;
+  height: 50px;
+  border-bottom: 1px dotted $clr-gray;
+  background-color: rgba($clr-gray, .1);
+  resize: none;
+  white-space: nowrap;
+  overflow-x: none;
 }
 
 [name="body"] {
-    height:calc(90vh - 100px);
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-
+  height: calc(90vh - 100px);
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }

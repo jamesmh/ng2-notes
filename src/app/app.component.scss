@@ -1,0 +1,18 @@
+@import '../_vars.scss';
+
+main {
+    margin: 0;
+}
+
+.left {
+    height:calc(100vh - 100px);
+    width: 30%;   
+    margin: 0; 
+    border-right: 1px solid $clr-gray;
+}
+
+.right {
+    height: 100%;
+    width:70%;
+    margin: 0;
+}

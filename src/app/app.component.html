@@ -1,10 +1,12 @@
 
 <main>
   <app-header></app-header>
+  <div class="flex">
     <aside class="left">
-      <app-notes-list [notes]="this.notes"></app-notes-list>
+      <app-notes-list [notes]="this.notes" (onSelected)="NoteSelected($event)" (onAdd)="AddNote($event)" (onDelete)="DeleteNote($event)"></app-notes-list>
     </aside>
     <section class="right">
-      <app-note-editor></app-note-editor>
+      <app-note-editor [note]="activeNote" (onUpdated)="SaveNote($event)"></app-note-editor>
     </section>
+  </div>
 </main>

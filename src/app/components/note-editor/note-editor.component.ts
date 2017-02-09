@@ -1,34 +1,62 @@
+import Note from '../../types/note';
 import { Subject } from 'rxjs/Rx';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-note-editor',
   templateUrl: './note-editor.component.html',
-  styleUrls: ['./note-editor.component.scss']
+  styleUrls: ['./note-editor.component.scss'],
+  inputs: [ 'note' ]
 })
-export class NoteEditorComponent implements OnInit {
+export class NoteEditorComponent implements OnChanges {
 
-    inputModel: string;
-    modelChanged: Subject<string> = new Subject<string>();  
+  @Output() onUpdated: EventEmitter < Note > = new EventEmitter();
 
-    constructor() {
-      this.modelChanged
-        .debounceTime(500)
-        .distinctUntilChanged()
-        .subscribe(model => {
-          console.log(model);
-        });
-   }
+  note: Note;
+  title: string;
+  body: string;
+  createdAt: number;
+  titleChangedStream: Subject <string> = new Subject <string> ();
+  bodyChangedStream: Subject<string> = new Subject<string>();
+  readonly DefaultDebounce: number = 150;
+
+  constructor() {}
 
 
+  ngOnChanges() {
+    if (this.note) {
+      this.title = this.note.title;
+      this.body = this.note.body;
+      this.createdAt = this.note.createdAt;
+    } else {
+      this.title = "";
+      this.body = "";
+      this.createdAt = Note.NewCreatedAt();
+    }
+    this.titleChangedStream
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(model => {
+        this.onUpdated.emit(new Note(model, this.body, this.note.createdAt))
+      });
 
-  ngOnInit() {
+    this.bodyChangedStream
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(model => {
+        this.onUpdated.emit(new Note(this.title, model, this.note.createdAt))
+      });
   }
 
-  textChanged(text: string) {
-    this.inputModel = text;
-      this.modelChanged.next(text);
-   }
+
+  titleChanged(text: string) {
+    this.titleChangedStream.next(text);
+  }
+
+  bodyChanged(text: string) {
+    this.bodyChangedStream.next(text);
+  }
 
 }
+

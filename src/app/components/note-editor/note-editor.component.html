@@ -1,1 +1,2 @@
-<input name="edit" contenteditable="true" [ngModel]='textText' (ngModelChange)='textChanged($event)' />
+<textarea name="title" [ngModel]='title' (ngModelChange)='titleChanged($event)' rows="1"></textarea>
+<textarea name="body" [ngModel]='body' (ngModelChange)='bodyChanged($event)' multiple="multiple"></textarea>

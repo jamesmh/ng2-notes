@@ -1,4 +1,6 @@
-h2 {
+@import '../../../_vars.scss';
+
+h2 {    
     font-weight: 300;
     margin-bottom: 0;
     margin-top:0;
@@ -8,4 +10,20 @@ p {
     font-weight: 300;
     font-size:.8em;
     margin:0;
+}
+button.delete {
+    margin-top: 10px;
+    transition: all .3s;
+    border: 2px solid $clr-red;
+    display: block;
+    color: $clr-red;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 800;
+
+    &:hover {
+        background-color: $clr-red;
+        color: #fff;
+        border-color: #fff;
+    }
 }

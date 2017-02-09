@@ -3,9 +3,13 @@ export default class Note {
     body: string;
     createdAt: number;
 
-    constructor(t: string, b: string) {
+    constructor(t: string, b: string, createdAt?: number) {
         this.title = t;
         this.body = b;
-        this.createdAt = new Date().getUTCMilliseconds();
+        this.createdAt = createdAt || Note.NewCreatedAt();
+    }
+
+    static NewCreatedAt() {
+        return new Date().getUTCMilliseconds();
     }
 }

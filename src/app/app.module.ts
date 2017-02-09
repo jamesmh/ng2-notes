@@ -1,3 +1,4 @@
+import { NoteService } from './services/note.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +24,7 @@ import { NoteEditorComponent } from './components/note-editor/note-editor.compon
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ NoteService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

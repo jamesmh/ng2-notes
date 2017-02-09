@@ -25,8 +25,25 @@ ul {
         &:hover {
             background-color: #000;
             color: #fff;
-            transform: perspective(50em) rotateY(20deg);
+            transform: perspective(50em) rotateY(15deg);
             box-shadow: rgba($clr-gray, .2) 3px 3px 3px;
         }
+    }
+}
+
+button.new {
+    transition: all .3s;
+    border: 2px solid $clr-blue;
+    margin: auto;
+    display: block;
+    color: $clr-blue;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 800;
+
+    &:hover {
+        background-color: $clr-blue;
+        color: #fff;
+        border-color: #fff;
     }
 }

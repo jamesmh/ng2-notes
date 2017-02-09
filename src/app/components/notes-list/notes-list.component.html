@@ -1,7 +1,8 @@
 <h2>Your Notes</h2>
 
+<button class="new" (click)="NewNote()">Add A New Note</button>
 <ul>
-    <li *ngFor="let note of notes">
-        <app-note [note]="note"></app-note>
+    <li *ngFor="let note of notes" (click)="NoteSelected(note);" >
+        <app-note [note]="note" (onDelete)="DeleteNote($event)"></app-note>
     </li>
 </ul>

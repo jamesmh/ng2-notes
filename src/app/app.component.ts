@@ -15,8 +15,9 @@ export class AppComponent {
   constructor($noteService: NoteService) {
     this.$noteService = $noteService;
     this.notes = [
-      new Note("First Note", "I am your first note. You can remove me or change me if you like!")
+      new Note("Read Me...", `This is a simple Angular 2 based note taking demo app. While typing new content into a note you'll see that it auto-updates in the left menu with the most recent content and uses a flash animation. Pretty cool eh!`)
     ];
+    this.activeNote = this.notes[0];
   }
 
   NoteSelected(note) {

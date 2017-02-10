@@ -13,26 +13,38 @@ textarea {
   resize: none;
   padding: 10px;
   font-family: 'Lato', sans-serif;
-  font-weight: 500;
-  font-size: 24px;
 
   &:focus {
     background-color: #000;
     color: #fff;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
 }
 
 [name="title"] {
-  height: 50px;
+    font-size: 24px;
+  font-weight: 500;
   border-bottom: 1px dotted $clr-gray;
   background-color: rgba($clr-gray, .1);
   resize: none;
   white-space: nowrap;
   overflow-x: none;
+
+  &:focus {
+    font-size: 40px;
+  }
 }
 
 [name="body"] {
   height: calc(90vh - 100px);
   font-family: 'Lato', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
+  font-size: 14px;
+   &:focus {
+    font-size: 20px;
+  }
+
 }

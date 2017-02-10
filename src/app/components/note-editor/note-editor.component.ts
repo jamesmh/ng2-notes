@@ -19,7 +19,6 @@ export class NoteEditorComponent implements OnChanges {
   createdAt: number;
   titleChangedStream: Subject <string> = new Subject <string> ();
   bodyChangedStream: Subject<string> = new Subject<string>();
-  readonly DefaultDebounce: number = 150;
 
   constructor() {}
 
@@ -35,14 +34,14 @@ export class NoteEditorComponent implements OnChanges {
       this.createdAt = Note.NewCreatedAt();
     }
     this.titleChangedStream
-      .debounceTime(150)
+      .debounceTime(400)
       .distinctUntilChanged()
       .subscribe(model => {
         this.onUpdated.emit(new Note(model, this.body, this.note.createdAt))
       });
 
     this.bodyChangedStream
-      .debounceTime(150)
+      .debounceTime(400)
       .distinctUntilChanged()
       .subscribe(model => {
         this.onUpdated.emit(new Note(this.title, model, this.note.createdAt))

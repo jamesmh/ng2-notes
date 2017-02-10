@@ -1,2 +1,2 @@
-<textarea name="title" [ngModel]='title' (ngModelChange)='titleChanged($event)' rows="1"></textarea>
-<textarea name="body" [ngModel]='body' (ngModelChange)='bodyChanged($event)' multiple="multiple"></textarea>
+<textarea name="title" [disabled]="!this.note" [ngModel]='title' (ngModelChange)='titleChanged($event)' rows="1"></textarea>
+<textarea name="body" [disabled]="!this.note" [ngModel]='body' (ngModelChange)='bodyChanged($event)' multiple="multiple"></textarea>

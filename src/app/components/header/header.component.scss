@@ -8,15 +8,17 @@ header {
     h1 {
         font-weight: 300;
         margin-left: 40px;
-        float: left;
     }
 
-    h5 {
+    h5.left {
         font-weight:500;
-        float:left;
         position: absolute;
         left:40px;
         top:25px;
         color: $clr-blue;                
+    }
+
+    h5.right {
+        margin-right: 10px;
     }
 }

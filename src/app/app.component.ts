@@ -1,23 +1,37 @@
+import { Tag } from './types/tag';
 import { NoteService } from './services/note.service';
 import Note from './types/note';
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnChanges {
   notes: Note[];
   activeNote: Note = null;
   $noteService: NoteService;
+  tags: Tag[];
 
   constructor($noteService: NoteService) {
     this.$noteService = $noteService;
     this.notes = [
-      new Note("Read Me...", `This is a simple Angular 2 based note taking demo app. While typing new content into a note you'll see that it auto-updates in the left menu with the most recent content and uses a flash animation. Pretty cool eh!`)
+      new Note("Read Me...", `This is a quick demo app, some highlights include: 
+      - New content auto-updates in the left menu
+      - Nifty CSS3 animations
+      - Real-time calculation of all your note's "tags" (i.e. words...) appearing in the right panel
+      - Functional programming (see github link on top right and check files "src/app/services/note.service.ts" 
+        and "src/app/types/note.ts")  )
+      - No CSS frameworks being used :)
+      `)
     ];
     this.activeNote = this.notes[0];
+        this.UpdateTags(this.notes);
+  }
+
+  ngOnChanges(){
+
   }
 
   NoteSelected(note) {
@@ -26,17 +40,25 @@ export class AppComponent {
 
   SaveNote(note) {
     this.notes = this.$noteService.SaveNotes(this.notes, note);
+    this.UpdateTags(this.notes);
   }
 
   AddNote() {
-    debugger;
     const result = this.$noteService.CreateNew(this.notes);
     this.notes = result.notes;
-    this.activeNote = result.new;
+    this.activeNote = null;
+    this.UpdateTags(this.notes);
   }
 
   DeleteNote(note) {
     this.notes = this.$noteService.DeleteNote(this.notes, note);
+        this.UpdateTags(this.notes);
     this.activeNote = null;
   }
+
+  UpdateTags(notes){
+    this.tags = this.$noteService.GetTags(this.notes);
+  }
+
+      
 }

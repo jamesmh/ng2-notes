@@ -2,11 +2,14 @@
 <main>
   <app-header></app-header>
   <div class="flex">
-    <aside class="left">
+    <aside class="left-col">
       <app-notes-list [notes]="this.notes" (onSelected)="NoteSelected($event)" (onAdd)="AddNote($event)" (onDelete)="DeleteNote($event)"></app-notes-list>
     </aside>
-    <section class="right">
+    <section class="middle-col">
       <app-note-editor [note]="activeNote" (onUpdated)="SaveNote($event)"></app-note-editor>
+    </section>
+    <section class="right-col">
+      <app-tags-list [tags]="this.tags"></app-tags-list>
     </section>
   </div>
 </main>

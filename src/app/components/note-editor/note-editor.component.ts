@@ -34,14 +34,14 @@ export class NoteEditorComponent implements OnChanges {
       this.createdAt = Note.NewCreatedAt();
     }
     this.titleChangedStream
-      .debounceTime(400)
+      .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(model => {
         this.onUpdated.emit(new Note(model, this.body, this.note.createdAt))
       });
 
     this.bodyChangedStream
-      .debounceTime(400)
+      .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(model => {
         this.onUpdated.emit(new Note(this.title, model, this.note.createdAt))

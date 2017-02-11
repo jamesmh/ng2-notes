@@ -1,5 +1,7 @@
 import Note from '../types/note';
 import { Injectable } from '@angular/core';
+import { Tag } from '../types/tag';
+import * as _ from 'lodash';
 
 @Injectable()
 export class NoteService {
@@ -9,10 +11,10 @@ export class NoteService {
   SaveNotes(notes: Note[], note: Note) {
     let match = notes.filter(n => n.createdAt == note.createdAt)[0];
     if (match) {
-      return notes.filter(n => n.createdAt !== note.createdAt).concat(note).sort(this.sortNotes);
+      return notes.filter(n => n.createdAt !== note.createdAt).concat(note).sort(ByCreatedAt);
     }
     else {
-      return notes.concat(note).sort(this.sortNotes);
+      return notes.concat(note).sort(ByCreatedAt);
     }
   }
 
@@ -25,11 +27,28 @@ export class NoteService {
   }
 
   DeleteNote(notes: Note[], toDelete: Note) : Note[] {
-    return notes.filter(n => n.createdAt != toDelete.createdAt);
+    return notes.filter(n => n.createdAt !== toDelete.createdAt);
   }
 
-  private sortNotes(a, b) {
-    return a.createdAt > b.createdAt ? 1 : -1;
+  GetTags(notes: Note[]) : Tag[] {
+    return _(notes)
+    .map(GetTagsFromNote)
+    .flatten()
+    .groupBy(TagName)
+    .map(GetReducedTagFromGroup)
+    .filter(ByCountMoreThan(0))
+    .sort(ByTagName)
+    .value();
   }
 
 }
+
+const ByCreatedAt = (a, b) => a.createdAt > b.createdAt ? 1 : -1;
+const GetTagsFromNote = (note: Note) => note.tags;
+const TagName = (tag:any) => tag.name;
+const GetReducedTagFromGroup = (group: any[]) => {
+  return {name: group[0].name, amount: group.map(ToTagAmount).reduce((acc, curr) => acc + curr) };
+};
+const ByCountMoreThan = (num:number) => (tag:Tag) => tag.amount > num;
+const ByTagName = (a,b) => a.name >= b.name ? 1 : -1;
+const ToTagAmount = tag => tag.amount;

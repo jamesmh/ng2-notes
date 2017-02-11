@@ -9,17 +9,25 @@ main {
     flex-direction: row;
 }
 
-.left {
+.left-col {
     height:calc(100vh - 100px);
     width: 30%;   
     margin: 0; 
     box-sizing: border-box;
-    border-right: 1px solid $clr-gray;
+    overflow-y: auto;
 }
 
-.right {
-    height: 100%;
-    width:70%;
+.middle-col {
+    height: calc(100vh - 100px);
+    width:50%;
     margin: 0;
     box-sizing: border-box;
+}
+
+.right-col {
+    height: calc(100vh - 100px);
+    width:20%;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
 }

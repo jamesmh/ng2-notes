@@ -9,6 +9,7 @@ import { NotesListComponent } from './components/notes-list/notes-list.component
 import { NoteComponent } from './components/note/note.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
+import { TagsListComponent } from './components/tags-list/tags-list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NoteEditorComponent } from './components/note-editor/note-editor.compon
     NotesListComponent,
     NoteComponent,
     TruncatePipe,
-    NoteEditorComponent
+    NoteEditorComponent,
+    TagsListComponent
   ],
   imports: [
     BrowserModule,

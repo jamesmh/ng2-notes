@@ -19,7 +19,7 @@ export class NoteService {
   }
 
   CreateNew(notes: Note[]): { notes: Note[], new: Note } {
-    const note = new Note("New Note", "");
+    const note = new Note("New Note", "Fill me in");
     return {
       notes: this.SaveNotes(notes, note),
       new: note
@@ -29,26 +29,6 @@ export class NoteService {
   DeleteNote(notes: Note[], toDelete: Note) : Note[] {
     return notes.filter(n => n.createdAt !== toDelete.createdAt);
   }
-
-  GetTags(notes: Note[]) : Tag[] {
-    return _(notes)
-    .map(GetTagsFromNote)
-    .flatten()
-    .groupBy(TagName)
-    .map(GetReducedTagFromGroup)
-    .filter(ByCountMoreThan(0))
-    .sort(ByTagName)
-    .value();
-  }
-
 }
 
 const ByCreatedAt = (a, b) => a.createdAt > b.createdAt ? 1 : -1;
-const GetTagsFromNote = (note: Note) => note.tags;
-const TagName = (tag:any) => tag.name;
-const GetReducedTagFromGroup = (group: any[]) => {
-  return {name: group[0].name, amount: group.map(ToTagAmount).reduce((acc, curr) => acc + curr) };
-};
-const ByCountMoreThan = (num:number) => (tag:Tag) => tag.amount > num;
-const ByTagName = (a,b) => a.name >= b.name ? 1 : -1;
-const ToTagAmount = tag => tag.amount;

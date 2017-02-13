@@ -1,3 +1,4 @@
+import { TagService } from './services/tag.service';
 import { NoteService } from './services/note.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -26,7 +27,7 @@ import { TagsListComponent } from './components/tags-list/tags-list.component';
     FormsModule,
     HttpModule
   ],
-  providers: [ NoteService ],
+  providers: [ NoteService, TagService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

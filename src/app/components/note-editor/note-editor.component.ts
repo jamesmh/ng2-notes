@@ -16,7 +16,6 @@ export class NoteEditorComponent implements OnChanges {
   note: Note;
   title: string;
   body: string;
-  createdAt: number;
   titleChangedStream: Subject <string> = new Subject <string> ();
   bodyChangedStream: Subject<string> = new Subject<string>();
 
@@ -27,21 +26,19 @@ export class NoteEditorComponent implements OnChanges {
     if (this.note) {
       this.title = this.note.title;
       this.body = this.note.body;
-      this.createdAt = this.note.createdAt;
     } else {
       this.title = "";
       this.body = "";
-      this.createdAt = Note.NewCreatedAt();
     }
     this.titleChangedStream
-      .debounceTime(200)
+      .debounceTime(100)
       .distinctUntilChanged()
       .subscribe(model => {
         this.onUpdated.emit(new Note(model, this.body, this.note.createdAt))
       });
 
     this.bodyChangedStream
-      .debounceTime(200)
+      .debounceTime(100)
       .distinctUntilChanged()
       .subscribe(model => {
         this.onUpdated.emit(new Note(this.title, model, this.note.createdAt))

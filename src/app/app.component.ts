@@ -1,3 +1,4 @@
+import { TagService } from './services/tag.service';
 import { Tag } from './types/tag';
 import { NoteService } from './services/note.service';
 import Note from './types/note';
@@ -13,16 +14,17 @@ export class AppComponent implements OnChanges {
   activeNote: Note = null;
   $noteService: NoteService;
   tags: Tag[];
+  $tagService: TagService;
 
-  constructor($noteService: NoteService) {
+  constructor($noteService: NoteService, $tagService: TagService) {
+    this.$tagService = $tagService;
     this.$noteService = $noteService;
     this.notes = [
       new Note("Read Me...", `This is a quick demo app, some highlights include: 
-      - New content auto-updates in the left menu
+
+      - New note content auto-updates the left menu as you type in the editor
       - Nifty CSS3 animations
       - Real-time calculation of all your note's "tags" (i.e. words...) appearing in the right panel
-      - Functional programming (see github link on top right and check files "src/app/services/note.service.ts" 
-        and "src/app/types/note.ts")  )
       - No CSS frameworks being used :)
       `)
     ];
@@ -57,7 +59,7 @@ export class AppComponent implements OnChanges {
   }
 
   UpdateTags(notes){
-    this.tags = this.$noteService.GetTags(this.notes);
+    this.tags = this.$tagService.CalculateTagsFromNotes(this.notes);
   }
 
       

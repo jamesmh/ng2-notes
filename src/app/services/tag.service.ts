@@ -1,6 +1,6 @@
-import {  Tag} from '../types/tag';
+import {  Tag  } from '../types/tag';
 import Note from '../types/note';
-import {  Injectable} from '@angular/core';
+import {  Injectable  } from '@angular/core';
 import * as _ from 'lodash';
 
 @Injectable()
